@@ -51,13 +51,16 @@ HID 厂商通道，命令字和帧格式都不一样。
 需要 **Python 3.9+**，并且带着 tkinter（python.org 的安装包默认勾选 tcl/tk，别去掉）。
 
 ```bat
-git clone https://github.com/jv0721/peripheral-battery.git
-cd peripheral-battery
+git clone https://github.com/jv0721/device-battery-tray.git
+cd device-battery-tray
 
 py my_devices.py      :: 只开面板
 py tray_app.py        :: 只起托盘
-启动电量面板.bat        :: 托盘 + 面板一起起（推荐）
+启动电量面板.bat        :: 托盘 + 面板一起起
 ```
+
+双击 `启动电量面板.bat` 最省事，但它只能找到 PATH 里的 Python。如果你的 Python
+装在别处（比如 `D:\Anaconda`），用记事本打开它，把 `set "PY=pyw"` 改成完整路径就行。
 
 没有设备插着也想看看界面长什么样，可以先跑一次命令行自检：
 

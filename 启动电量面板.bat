@@ -1,25 +1,27 @@
 @echo off
 chcp 65001 >nul
-setlocal
+cd /d "%~dp0"
 
-rem 找一个能用的 pythonw.exe（不带黑框的那个）。找不到就让用户自己填。
-set "PY="
-where pyw >nul 2>nul && set "PY=pyw"
-if not defined PY where pythonw >nul 2>nul && set "PY=pythonw"
-for %%V in (314 313 312 311 310 39 38) do (
-  if not defined PY if exist "%LOCALAPPDATA%\Programs\Python\Python%%V\pythonw.exe" (
-    set "PY=%LOCALAPPDATA%\Programs\Python\Python%%V\pythonw.exe"
-  )
-)
-if not defined PY (
-  echo 没找到 Python。
-  echo 请先装 Python 3.9 以上（安装时记得勾上 tcl/tk），
-  echo 或者用记事本打开本文件，把 set "PY=..." 那一行改成你自己的路径。
-  pause
-  exit /b 1
-)
+rem 优先用 Python 官方启动器；没有就退回 PATH 里的 pythonw。
+rem 如果你的 Python 不在这两处（例如装在 D:\Anaconda），
+rem 把下一行直接改成它的完整路径：set "PY=D:\Anaconda\pythonw.exe"
+set "PY=pyw"
 
-rem 先把托盘拉起来（已经在跑的话它自己会退出），再打开面板
-start "" "%PY%" "%~dp0tray_app.py"
+where pyw >nul 2>nul
+if not errorlevel 1 goto run
+
+set "PY=pythonw"
+where pythonw >nul 2>nul
+if not errorlevel 1 goto run
+
+echo 没找到 Python。
+echo 请装一个 Python 3.9 以上（安装时勾上 tcl/tk），
+echo 或者用记事本打开本文件，把 set "PY=pyw" 改成你机器上 pythonw.exe 的完整路径。
+pause
+exit /b 1
+
+:run
+rem 先把托盘拉起来（已经在跑的话它会自己退出），再打开面板
+start "" %PY% "%~dp0tray_app.py"
 timeout /t 2 /nobreak >nul
-start "" "%PY%" "%~dp0my_devices.py"
+start "" %PY% "%~dp0my_devices.py"
