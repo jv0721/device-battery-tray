@@ -43,8 +43,12 @@ HID 厂商通道，命令字和帧格式都不一样。
 
 ### 用打包好的 exe
 
-如果 [Releases](../../releases) 里放了 `外设电量.exe`，直接下下来放在任意一个空目录里双击即可。
-配置和日志都生成在 exe 旁边，不写注册表、不装服务。
+如果 [Releases](../../releases) 里放了 `device-battery-tray-v1.0.0.exe`，下载后放在任意一个空目录里
+双击即可，不用安装。配置和日志都生成在 exe 旁边，不写注册表、不起服务。
+
+下载完随手改成「外设电量.exe」也完全没问题 —— 程序内部不认自己的文件名，
+窗口标题、托盘提示、桌面快捷方式都是中文（`--install` 建出来的快捷方式就叫「外设电量」）。
+可执行文件名用 ASCII 只是为了下载链接干净、好复制，那是发布包的惯例，不是使用要求。
 
 Releases 里还没有的话，按下面「自己打包 exe」那节打一个，一条命令的事。
 
@@ -146,8 +150,13 @@ pyinstaller --noconfirm --onefile --windowed --name DeviceBattery ^
   --icon assets\app.ico --add-data "assets;assets" app.py
 ```
 
-打出来的 `dist\DeviceBattery.exe` 改成中文名就能用。**Pillow 要带上**，
+打出来的 `dist\DeviceBattery.exe` 就是成品，改成什么名字都能跑。**Pillow 要带上**，
 不带的话产品图会退化成占位文字（缩图那步需要它）。
+
+对外发的时候，附件名建议用 `device-battery-tray-v1.0.0.exe` 这种
+「仓库名 + 版本号」的全 ASCII 写法：下载链接不会被百分号编码成一串
+`%E5%A4%96%E8%AE%BE...`，别人转发、写脚本引用都省事。自己用就随便，改成
+「外设电量.exe」放桌面上更一眼认得。
 
 ## 已知限制
 
