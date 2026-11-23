@@ -1,0 +1,9 @@
+* text=auto
+
+# 二进制，别做换行转换
+*.png binary
+*.ico binary
+*.exe binary
+
+# 批处理必须是 CRLF，否则有些 Windows 版本会读错行
+*.bat text eol=crlf

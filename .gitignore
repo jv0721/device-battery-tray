@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# 打包工具链与产物
+_build/
+build/
+dist/
+*.spec
+.build-venv/
+*.exe
+
+# 调试与逆向实验脚本：含本机路径和抓包产物，不随仓库发布
+_lab/
+hunt/
+
+# 运行时生成的文件 —— 属于使用者自己的数据，不应该进仓库
+tray_config.json
+tray_pid.txt
+电量日志.csv
+电量日志-*.csv
+probe.txt
+diag.txt

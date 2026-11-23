@@ -1,0 +1,19 @@
+这两张图是官方的产品图，从厂商自己的图床上取的，都是透明底 PNG：
+
+  keyboard.png  迈从官方商城图床（maicong OSS）
+                https://mchose-admin.oss-cn-shenzhen.aliyuncs.com/shop/26166_1dIewM6mVIacg7Et2PimK.jpg
+  mouse.png     雷柏官网商品图库（rapoo.cn）
+                https://rpw.rapoo.cn/goods/gallery/1780650447219.jpg
+                （服务器返回的其实是无损 PNG，只是文件名是 .jpg）
+
+想换成自己设备的实物照，直接覆盖这两个文件就行，程序只认文件名，不认内容：
+
+  assets/keyboard.png   键盘图，建议透明底，横图
+  assets/mouse.png      鼠标图，建议透明底，横图
+
+要求：
+  * PNG 格式、带透明通道最合适（深色背景上不会有白框）
+  * 不带透明通道也能用，会自动贴在一片浅色底上
+  * 建议宽度 800~1200 像素，太大只是白占内存
+
+如果哪天把这两个文件删了，程序不会报错——它会退回去用代码画的示意图。
